@@ -11,6 +11,7 @@
 		260DD1452B6142A5000585DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DD1442B6142A5000585DA /* ContentView.swift */; };
 		260DD1472B6142A6000585DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260DD1462B6142A6000585DA /* Assets.xcassets */; };
 		260DD14B2B6142A7000585DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260DD14A2B6142A7000585DA /* Preview Assets.xcassets */; };
+		260DD1522B6149D4000585DA /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DD1512B6149D4000585DA /* Controller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		260DD1462B6142A6000585DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		260DD1482B6142A6000585DA /* WWDC2024.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWDC2024.entitlements; sourceTree = "<group>"; };
 		260DD14A2B6142A7000585DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		260DD1512B6149D4000585DA /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				260DD1422B6142A5000585DA /* WWDC2024App.swift */,
 				260DD1442B6142A5000585DA /* ContentView.swift */,
+				260DD1512B6149D4000585DA /* Controller.swift */,
 				260DD1462B6142A6000585DA /* Assets.xcassets */,
 				260DD1482B6142A6000585DA /* WWDC2024.entitlements */,
 				260DD1492B6142A7000585DA /* Preview Content */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				260DD1522B6149D4000585DA /* Controller.swift in Sources */,
 				260DD1452B6142A5000585DA /* ContentView.swift in Sources */,
 				260DD1432B6142A5000585DA /* WWDC2024App.swift in Sources */,
 			);

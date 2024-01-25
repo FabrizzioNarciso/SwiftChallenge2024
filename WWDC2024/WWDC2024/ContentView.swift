@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var controllerInstance = Controller()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+       VStack
+        {
+            ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
+                Text(prompt.text)
+                
+                ForEach(prompt.options, id:\.self) { option in
+                    Button(action: {
+                        
+                        controllerInstance.promptHistoryUpdate(promptID: option.nextPromptID, answer: option.answer)
+               
+
+                    }
+                           , label: {
+                        Text(option.text)
+                    }).disabled(prompt.promptID != controllerInstance.currentPromptID)
+                }
+                Text(prompt.answer)
+              
+            }
         }
-        .padding()
+       
     }
 }
 
