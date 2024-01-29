@@ -12,6 +12,14 @@
 		260DD1472B6142A6000585DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260DD1462B6142A6000585DA /* Assets.xcassets */; };
 		260DD14B2B6142A7000585DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 260DD14A2B6142A7000585DA /* Preview Assets.xcassets */; };
 		260DD1522B6149D4000585DA /* Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DD1512B6149D4000585DA /* Controller.swift */; };
+		260DD1562B67C15A000585DA /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260DD1552B67C15A000585DA /* ModelView.swift */; };
+		260DD15F2B67CA9B000585DA /* Jupiter.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD1582B67CA9B000585DA /* Jupiter.usdz */; };
+		260DD1602B67CA9B000585DA /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD1592B67CA9B000585DA /* Earth.usdz */; };
+		260DD1612B67CA9B000585DA /* Mercury.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD15A2B67CA9B000585DA /* Mercury.usdz */; };
+		260DD1622B67CA9B000585DA /* Moon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD15B2B67CA9B000585DA /* Moon.usdz */; };
+		260DD1632B67CA9B000585DA /* Sun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD15C2B67CA9B000585DA /* Sun.usdz */; };
+		260DD1642B67CA9B000585DA /* Neptune.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD15D2B67CA9B000585DA /* Neptune.usdz */; };
+		260DD1652B67CA9B000585DA /* Mars.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 260DD15E2B67CA9B000585DA /* Mars.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		260DD1482B6142A6000585DA /* WWDC2024.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWDC2024.entitlements; sourceTree = "<group>"; };
 		260DD14A2B6142A7000585DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		260DD1512B6149D4000585DA /* Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controller.swift; sourceTree = "<group>"; };
+		260DD1552B67C15A000585DA /* ModelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		260DD1582B67CA9B000585DA /* Jupiter.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Jupiter.usdz; sourceTree = "<group>"; };
+		260DD1592B67CA9B000585DA /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Earth.usdz; sourceTree = "<group>"; };
+		260DD15A2B67CA9B000585DA /* Mercury.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mercury.usdz; sourceTree = "<group>"; };
+		260DD15B2B67CA9B000585DA /* Moon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Moon.usdz; sourceTree = "<group>"; };
+		260DD15C2B67CA9B000585DA /* Sun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sun.usdz; sourceTree = "<group>"; };
+		260DD15D2B67CA9B000585DA /* Neptune.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Neptune.usdz; sourceTree = "<group>"; };
+		260DD15E2B67CA9B000585DA /* Mars.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mars.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +72,9 @@
 			children = (
 				260DD1422B6142A5000585DA /* WWDC2024App.swift */,
 				260DD1442B6142A5000585DA /* ContentView.swift */,
+				260DD1552B67C15A000585DA /* ModelView.swift */,
 				260DD1512B6149D4000585DA /* Controller.swift */,
+				260DD1572B67CA9B000585DA /* Exemple Models */,
 				260DD1462B6142A6000585DA /* Assets.xcassets */,
 				260DD1482B6142A6000585DA /* WWDC2024.entitlements */,
 				260DD1492B6142A7000585DA /* Preview Content */,
@@ -70,6 +88,20 @@
 				260DD14A2B6142A7000585DA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		260DD1572B67CA9B000585DA /* Exemple Models */ = {
+			isa = PBXGroup;
+			children = (
+				260DD1582B67CA9B000585DA /* Jupiter.usdz */,
+				260DD1592B67CA9B000585DA /* Earth.usdz */,
+				260DD15A2B67CA9B000585DA /* Mercury.usdz */,
+				260DD15B2B67CA9B000585DA /* Moon.usdz */,
+				260DD15C2B67CA9B000585DA /* Sun.usdz */,
+				260DD15D2B67CA9B000585DA /* Neptune.usdz */,
+				260DD15E2B67CA9B000585DA /* Mars.usdz */,
+			);
+			path = "Exemple Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,8 +162,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				260DD1622B67CA9B000585DA /* Moon.usdz in Resources */,
+				260DD15F2B67CA9B000585DA /* Jupiter.usdz in Resources */,
+				260DD1612B67CA9B000585DA /* Mercury.usdz in Resources */,
+				260DD1632B67CA9B000585DA /* Sun.usdz in Resources */,
 				260DD14B2B6142A7000585DA /* Preview Assets.xcassets in Resources */,
+				260DD1602B67CA9B000585DA /* Earth.usdz in Resources */,
 				260DD1472B6142A6000585DA /* Assets.xcassets in Resources */,
+				260DD1652B67CA9B000585DA /* Mars.usdz in Resources */,
+				260DD1642B67CA9B000585DA /* Neptune.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +183,7 @@
 			files = (
 				260DD1522B6149D4000585DA /* Controller.swift in Sources */,
 				260DD1452B6142A5000585DA /* ContentView.swift in Sources */,
+				260DD1562B67C15A000585DA /* ModelView.swift in Sources */,
 				260DD1432B6142A5000585DA /* WWDC2024App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,8 +326,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -324,8 +364,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

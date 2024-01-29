@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SceneKit
 
 struct Prompt: Hashable {
     
@@ -14,7 +15,7 @@ struct Prompt: Hashable {
     var text: String
     var promptID: Int
     var options: [Option]
-    var answer: String = ""
+    var answer: String = "" //The answer is initialy set to a empty string, after the option is chosen, it will update as that option's "answer"
     
 }
 
@@ -26,10 +27,15 @@ struct Option: Hashable {
     
 }
 
+struct Model: Hashable {
+    var name: String
+    var modelID: Int
+}
 
 
 class Controller: ObservableObject {
     
+    //Prompt data
     var prompts: [Prompt] {
         [
             Prompt(text: "This would be the first written thing to be seen. You should pick a response", promptID: 0, options: [
@@ -45,39 +51,53 @@ class Controller: ObservableObject {
         ]
     }
     
-    @Published var currentPromptID: Int = 0
-    @Published var promptHistory: [Prompt] = []
-   
     
+    //3D model data
+    var models: [Model] {
+        [
+            Model(name: "Earth.usdz", modelID: 0),
+            Model(name: "Mars.usdz", modelID: 1)
+        ]
+    }
+    
+    
+    //Published vars
+    @Published var currentPromptID: Int = 0 //this is use to check whitch promp the game is at
+    @Published var promptHistory: [Prompt] = [] //this is what the view will check to build it self
+    @Published var modelID: Int = 0 //this will be used to call the 3d models to be shown 
+    
+   
+    //When the View firt appears, this init loads the first prompt in the history to start the game
     init() {
         promptHistoryUpdate(promptID: 0)
     }
     
+    
+    //uppon chosing a option, this function will be called to update the promptHistory, which updates the view
     func promptHistoryUpdate(promptID: Int, answer: String? = nil) {
+        
         if let prompt = prompts.first(where: { $0.promptID == promptID } ) {
-            
             if let answer = answer {
                 promptHistory[promptHistory.count - 1].answer = answer
             }
-            
             promptHistory.append(prompt)
             currentPromptID = promptID
-
         }
+        
     }
     
-    func fetchPrompt() -> Prompt {
-        guard let prompt = prompts.first(where: { $0.promptID == currentPromptID } ) else { return Prompt(text: "Error while fetching prompt", promptID: -1, options: []) }
-        return prompt
-    }
     
-    func fetchOptions(index: Int) -> String {
-      
-        if let prompt = prompts.first(where: { $0.promptID == currentPromptID } ) {
-            return prompt.options[index].text
-        } else {
-            return String("Option not found")
+    //this will be called to update the 3dmodel shown in the view
+    func fetchModel(ID: Int) -> SCNScene{
+        
+        if let model = models.first(where: { $0.modelID == ID}) {
+            if let scene = SCNScene(named: model.name) {
+                return scene
+            }
         }
+        
+        
+        return SCNScene(named:"Moon.usdz")!
     }
     
     

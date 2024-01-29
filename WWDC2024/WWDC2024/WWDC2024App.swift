@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct WWDC2024App: App {
+    @StateObject var controllerInstance = Controller()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                ModelView()
+                ContentView()
+            }.environmentObject(controllerInstance)
         }
     }
 }

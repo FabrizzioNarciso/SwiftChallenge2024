@@ -8,30 +8,42 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var controllerInstance = Controller()
-
+    @EnvironmentObject var  controllerInstance:Controller 
+    
     var body: some View {
-       VStack
-        {
-            ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
-                Text(prompt.text)
-                
-                ForEach(prompt.options, id:\.self) { option in
-                    Button(action: {
+        HStack {
+            Spacer(minLength: 640)
+            
+            ScrollViewReader { proxy in
+                ScrollView {
+                    
+                    ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
+                        Text(prompt.text)
                         
-                        controllerInstance.promptHistoryUpdate(promptID: option.nextPromptID, answer: option.answer)
-               
-
+                        ForEach(prompt.options, id:\.self) { option in
+                            Button(action: {
+                                
+                                controllerInstance.promptHistoryUpdate(promptID: option.nextPromptID, answer: option.answer)
+                                
+                                
+                            }
+                                   , label: {
+                                Text(option.text)
+                            }).disabled(prompt.promptID != controllerInstance.currentPromptID)
+                        }
+                        Text(prompt.answer)
+                        
                     }
-                           , label: {
-                        Text(option.text)
-                    }).disabled(prompt.promptID != controllerInstance.currentPromptID)
                 }
-                Text(prompt.answer)
-              
             }
+            .font(.title)
+            .padding(16)
+            .background(Material.ultraThin.opacity(1))
+            .scrollIndicators(.hidden)
+            
+            Spacer(minLength: 64)
+            
         }
-       
     }
 }
 
