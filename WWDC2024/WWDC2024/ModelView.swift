@@ -15,7 +15,7 @@ struct ModelView: View {
     
     var body: some View {
         
-        SceneView(scene: controllerInstance.fetchModel(ID: controllerInstance.modelID), options: [.autoenablesDefaultLighting, .allowsCameraControl])
+        SceneView(scene: controllerInstance.scene, options: [.autoenablesDefaultLighting, .allowsCameraControl])
             .ignoresSafeArea()
         
     }

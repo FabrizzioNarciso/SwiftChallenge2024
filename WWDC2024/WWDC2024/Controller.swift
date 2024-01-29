@@ -14,9 +14,9 @@ struct Prompt: Hashable {
     //This sets the properties of the main building block of the text
     var text: String
     var promptID: Int
+    var modelCaller: Int = -1
     var options: [Option]
     var answer: String = "" //The answer is initialy set to a empty string, after the option is chosen, it will update as that option's "answer"
-    
 }
 
 struct Option: Hashable {
@@ -33,6 +33,8 @@ struct Model: Hashable {
 }
 
 
+
+
 class Controller: ObservableObject {
     
     //Prompt data
@@ -41,7 +43,7 @@ class Controller: ObservableObject {
             Prompt(text: "This would be the first written thing to be seen. You should pick a response", promptID: 0, options: [
                 Option(text: "Option A", answer: "This will be a witty comment",nextPromptID: 1),
                 Option(text: "Option B", answer: "This will also be a witty comment",nextPromptID: 1)]),
-            Prompt(text: "After the witty comment about your response, i will say something else and so on.. ", promptID: 1, options: [
+            Prompt(text: "After the witty comment about your response, i will say something else and so on.. ", promptID: 1,modelCaller: 1, options: [
                 Option(text: "Option C", answer: "Pretend what whatever is written here is funny", nextPromptID: 2),
                 Option(text: "Option D", answer: "Pretend what whatever is written here is REALLY funny", nextPromptID: 2)]),
             Prompt(text: "This is to demostrate that some dialogs choices will change the background image", promptID: 2, options: [
@@ -65,11 +67,12 @@ class Controller: ObservableObject {
     @Published var currentPromptID: Int = 0 //this is use to check whitch promp the game is at
     @Published var promptHistory: [Prompt] = [] //this is what the view will check to build it self
     @Published var modelID: Int = 0 //this will be used to call the 3d models to be shown 
-    
+    @Published var scene:SCNScene? //this is the 3d model called in Model view 
    
     //When the View firt appears, this init loads the first prompt in the history to start the game
     init() {
         promptHistoryUpdate(promptID: 0)
+        scene = fetchModel(ID: 0)
     }
     
     
