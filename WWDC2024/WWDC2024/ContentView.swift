@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var controllerInstance:Controller
     
+    
     var body: some View {
         GeometryReader { geometry in //used to set the size of the Spacers, defining where the View will be in relation the the screen
             HStack {
@@ -20,22 +21,26 @@ struct ContentView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
-                            
+                        
                             Text(prompt.text)
-                                .opacity(prompt.anim.opacity)
-                            
+                                .opacity(prompt.animators[0])
                                 .onAppear {
-                                    withAnimation(.easeInOut(duration: 2.0)) {
-                                        // Set the opacity to 1.0 to gradually reveal the text
+                                    withAnimation(.easeInOut(duration: 3.0)) {
+                                        controllerInstance.animationRunner(parameter: 1.0, stage: 1)
                                     }
                                 }
+                            
                             
                             ForEach(prompt.options, id:\.self) { option in
                                 
                                 Button(action: {
                                     
                                     //When the button is selected, the linked answer will be uptaded, and the next prompt will be loaded in the promptHistory, whitch is used to build the View
+                                    
+                                    
                                     controllerInstance.promptHistoryUpdate(promptID: option.nextPromptID, answer: option.answer)
+                                    
+                                    
                                     
                                     //If a set option should trigger a change in the 3D model, this will be called
                                     if prompt.modelCaller != -1 {
@@ -53,16 +58,20 @@ struct ContentView: View {
                             }
                             
                             Text(prompt.answer) //initialy empty, this will be updated uppon chosing a option
-                            
+                               .opacity(prompt.animators[1])
+                               
+                              
+                
                             .id(prompt) //this is used for the automatic scrolling
                         
                         }
                         
                       
-                        
                         //The "proxy" defined in the ScrollViewReader will scroll to bottom every time the promptHistory gets updated with a new Prompt
-                        .onChange(of: controllerInstance.promptHistory) {
+                        .onChange(of: controllerInstance.promptHistory.count) {
                             proxy.scrollTo(controllerInstance.promptHistory.last)
+    
+                        
                             
                         }
                     }

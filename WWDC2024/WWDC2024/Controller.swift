@@ -16,7 +16,9 @@ struct Prompt: Hashable {
     var promptID: Int
     var modelCaller: Int = -1
     var options: [Option]
-    var answer: String = "" //The answer is initialy set to a empty string, after the option is chosen, it will update as that option's "answer"
+    var answer: String = "This should not be showing" //The answer is initialy set to a empty string, after the option is chosen, it will update as that option's "answer"
+    var animators: [Double] = [0.0, 0.0]
+   
 }
 
 struct Option: Hashable {
@@ -31,6 +33,7 @@ struct Model: Hashable {
     var name: String
     var modelID: Int
 }
+
 
 
 
@@ -73,6 +76,7 @@ class Controller: ObservableObject {
     init() {
         promptHistoryUpdate(promptID: 0)
         scene = fetchModel(ID: 0)
+      
     }
     
     
@@ -82,11 +86,27 @@ class Controller: ObservableObject {
         if let prompt = prompts.first(where: { $0.promptID == promptID } ) {
             if let answer = answer {
                 promptHistory[promptHistory.count - 1].answer = answer
+               
             }
+            
+            
+            
             promptHistory.append(prompt)
             currentPromptID = promptID
         }
         
+    }
+    
+    func animationRunner(parameter: Double, stage: Int) {
+        if stage == 1 {
+            promptHistory[promptHistory.count - 1].animators[0] = parameter
+        } else if stage == 2 {
+            promptHistory[promptHistory.count - 1].animators[1] = parameter
+        }
+    }
+    
+    func fetchRunner() -> Double {
+        return promptHistory[promptHistory.count - 1].animators[1]
     }
     
     
