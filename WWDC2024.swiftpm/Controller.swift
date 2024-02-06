@@ -2,7 +2,7 @@
 //  Controller.swift
 //  WWDC2024
 //
-//  Created by Fabrizio Narciso on 24/01/24.
+//  Created by Fabrizio Narciso on 06/02/24.
 //
 
 import Foundation
@@ -11,32 +11,12 @@ import SceneKit
 
 struct Prompt: Hashable {
     
-//    static func == (lhs: Prompt, rhs: Prompt) -> Bool {
-//        lhs.promptID == rhs.promptID
-//    }
-//    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(promptID)
-//    }
-    
     //This sets the properties of the main building block of the text
     var text: String
     var promptID: Int
     var modelCaller: Int = -1
     var options: [Option]
     var answer: String = "" //The answer is initialy set to a empty string, after the option is chosen, it will update as that option's "answer"
-
-   
-    
-    
-//    init(text: String, promptID: Int, modelCaller: Int = -1, options: [Option], answer: String = "", animators: [Double] = [0.2,0.2]) {
-//        self.text = text
-//        self.promptID = promptID
-//        self.modelCaller = modelCaller
-//        self.options = options
-//        self.answer = answer
-//        self.animators = animators
-//    }
    
 }
 
@@ -87,8 +67,8 @@ class Controller: ObservableObject {
     //Published vars
     @Published var currentPromptID: Int = 0 //this is use to check whitch promp the game is at
     @Published var promptHistory: [Prompt] = [] //this is what the view will check to build it self
-    @Published var modelID: Int = 0 //this will be used to call the 3d models to be shown 
-    @Published var scene:SCNScene? //this is the 3d model called in Model view 
+    @Published var modelID: Int = 0 //this will be used to call the 3d models to be shown
+    @Published var scene:SCNScene? //this is the 3d model called in Model view
    
     //When the View firt appears, this init loads the first prompt in the history to start the game
     init() {
@@ -113,7 +93,7 @@ class Controller: ObservableObject {
     
 
     //this will be called to update the 3dmodel shown in the view
-    func fetchModel(ID: Int) -> SCNScene{
+    func fetchModel(ID: Int) -> SCNScene? {
         
         if let model = models.first(where: { $0.modelID == ID}) {
             if let scene = SCNScene(named: model.name) {
@@ -121,7 +101,7 @@ class Controller: ObservableObject {
             }
         }
         
-        return SCNScene(named:"Moon.usdz")!
+        return nil 
     }
     
     

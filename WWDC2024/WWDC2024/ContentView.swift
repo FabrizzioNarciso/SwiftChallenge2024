@@ -10,36 +10,26 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var controllerInstance:Controller
     
-    
     var body: some View {
+        
         GeometryReader { geometry in //used to set the size of the Spacers, defining where the View will be in relation the the screen
             HStack {
                 
                 Spacer()
-                   .frame(width: geometry.size.width * 0.55)
-                   
+                    .frame(width: geometry.size.width * 0.55)
+                
                 ScrollViewReader { proxy in
                     ScrollView {
                         ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
-                        
-                            Text(prompt.text)
-                                .opacity(prompt.animators[0])
-                                .onAppear {
-                                    withAnimation(.easeInOut(duration: 3.0)) {
-                                        controllerInstance.animationRunner(parameter: 1.0, stage: 1)
-                                    }
-                                }
                             
+                            Text(prompt.text)
                             
                             ForEach(prompt.options, id:\.self) { option in
                                 
                                 Button(action: {
                                     
                                     //When the button is selected, the linked answer will be uptaded, and the next prompt will be loaded in the promptHistory, whitch is used to build the View
-                                    
-                                    
                                     controllerInstance.promptHistoryUpdate(promptID: option.nextPromptID, answer: option.answer)
-                                    
                                     
                                     
                                     //If a set option should trigger a change in the 3D model, this will be called
@@ -47,9 +37,6 @@ struct ContentView: View {
                                         controllerInstance.modelID = prompt.modelCaller
                                         controllerInstance.scene = controllerInstance.fetchModel(ID: controllerInstance.modelID)
                                     }
-                                    
-                        
-                                    
                                 }
                                        , label: {
                                     Text(option.text)
@@ -58,23 +45,20 @@ struct ContentView: View {
                             }
                             
                             Text(prompt.answer) //initialy empty, this will be updated uppon chosing a option
-                               .opacity(prompt.animators[1])
-                               
-                              
-                
+                            
                             .id(prompt) //this is used for the automatic scrolling
-                        
+                            
                         }
                         
-                      
+                        
+                        
                         //The "proxy" defined in the ScrollViewReader will scroll to bottom every time the promptHistory gets updated with a new Prompt
                         .onChange(of: controllerInstance.promptHistory.count) {
                             proxy.scrollTo(controllerInstance.promptHistory.last)
-    
-                        
                             
                         }
                     }
+                    
                 }
                 .font(.title)
                 .padding(16)
@@ -82,7 +66,7 @@ struct ContentView: View {
                 .scrollIndicators(.hidden)
                 
                 Spacer()
-                   .frame(width: geometry.size.width * 0.05)
+                    .frame(width: geometry.size.width * 0.05)
                 
             }
         }
