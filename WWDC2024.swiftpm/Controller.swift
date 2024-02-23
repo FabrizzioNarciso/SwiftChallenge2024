@@ -47,7 +47,7 @@ class Controller: ObservableObject {
             Prompt(text: "So after the nothing, there was STUFF. \nHOT stuff. Just floating around, being too warm to do anything else.", promptID: 1, options: [
                 Option(text: "1. When was this?", answer: "Right at the very beginning of “when“. Like i said, before, there was no when, but when “when“ started, so did Stuff.", nextPromptID: 2),
                 Option(text: "2. “Hot stuff“ doesn't sound very, you know, scientific.", answer: "Well if you really must know, the fancy word for stuff is “matter“, and it being hot was caused by what is known as “energy“. But get out of here with these technicalities.", nextPromptID: 2)]),
-            Prompt(text: "This first state of ”everywhere-stuff-was-really-hot” didn't change for a WHILE. Things had to cool down a bit.", promptID: 2, modelCaller: 2, options: [
+            Prompt(text: "This first state of “everywhere-stuff-was-really-hot” didn't change for a WHILE. Things had to cool down a bit.", promptID: 2, modelCaller: 2, options: [
                 Option(text: "1. So it was still kinda boring. Great.", answer: "Be patient. Remember that the end of this story is that you now have to worry about things like what to have for dinner and whatever a ”Large Language Model” is.",nextPromptID: 3),
                 Option(text: "2. How much time?", answer: "400 000 years give or take. \nOr 3 jimbos. \nOr 5.7 flerberts. \nOutside the average lifespan of us fleshy things, time starts to have little meaning, so go crazy!",nextPromptID: 3)]),
             Prompt(text: "When stuff cooled down enough, it started to group together into these tiny things Nerds call ”Atoms”, but i think we should give them our own name.", promptID: 3, options: [

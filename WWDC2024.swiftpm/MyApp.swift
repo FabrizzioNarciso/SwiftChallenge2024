@@ -11,7 +11,9 @@ struct MyApp: App {
             ZStack {
                 ModelView() //Where the 3D models will be shown
                 ContentView() //Where the dialog will be shown
-            }.environmentObject(controllerInstance) //this sets the declared StateObject as observable to the intire view hierarchy
+                    .ignoresSafeArea()
+            }
+            .environmentObject(controllerInstance) //this sets the declared StateObject as observable to the intire view hierarchy
             .preferredColorScheme(.dark)
         }
         

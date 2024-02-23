@@ -18,8 +18,9 @@ struct ModelView: View {
         GeometryReader { geometry in
             VideoPlayer(player: controllerInstance.player)
                 .disabled(true)
-                //.frame(width: geometry.size.width, height: geometry.size.height)
                 .ignoresSafeArea()
+                .frame(width: geometry.size.height*16/9, height: geometry.size.height)
+                .position(x: geometry.size.width/2, y:geometry.size.height/2)
                 .onAppear {
                     controllerInstance.player?.play()
                     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: nil, queue: .main) { _ in self.controllerInstance.player?.seek(to: .zero)
