@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import SceneKit
+import AVKit
 
 struct Prompt: Hashable {
     
@@ -41,15 +41,22 @@ class Controller: ObservableObject {
     //Prompt data
     var prompts: [Prompt] {
         [
-            Prompt(text: "This would be the first written thing to be seen. You should pick a response", promptID: 0, options: [
-                Option(text: "Option A", answer: "This will be a witty comment",nextPromptID: 1),
-                Option(text: "Option B", answer: "This will also be a witty comment",nextPromptID: 1)]),
-            Prompt(text: "After the witty comment about your response, i will say something else and so on.. ", promptID: 1,modelCaller: 1, options: [
-                Option(text: "Option C", answer: "Pretend what whatever is written here is funny", nextPromptID: 2),
-                Option(text: "Option D", answer: "Pretend what whatever is written here is REALLY funny", nextPromptID: 2)]),
-            Prompt(text: "This is to demostrate that some dialogs choices will change the background image", promptID: 2, options: [
-                Option(text: "Option E", answer: "",nextPromptID: 3),
-                Option(text: "Option F", answer: "",nextPromptID: 3)])
+            Prompt(text: "In the beginning there was nothing. \nWell, not really. \nThere was no “beginning”. No “middle” or “end”. Not even a “there”, actually. Without any time or place. \nJust sweet sweet nothing.", promptID: 0, modelCaller: 1, options: [
+                Option(text: "1. Mmmh, sounds boring", answer: "Well, maybe. But think about it, The silence, the pure bliss. \nBUT  as we know, nothing good ever lasts. At some point, things changed from nothing to something.",nextPromptID: 1),
+                Option(text: "2. Wait, really? Nothing?", answer: "Not. A. Thing. \nNot even the concept of ”thing”. \nIt was just the ____. \n(Actually no one knows for sure. But it is more trippy to say that it was the ____, so bear with me.)",nextPromptID: 1)]),
+            Prompt(text: "So after the nothing, there was STUFF. \nHOT stuff. Just floating around, being too warm to do anything else.", promptID: 1, options: [
+                Option(text: "1. When was this?", answer: "Right at the very beginning of “when“. Like i said, before, there was no when, but when “when“ started, so did Stuff.", nextPromptID: 2),
+                Option(text: "2. “Hot stuff“ doesn't sound very, you know, scientific.", answer: "Well if you really must know, the fancy word for stuff is “matter“, and it being hot was caused by what is known as “energy“. But get out of here with these technicalities.", nextPromptID: 2)]),
+            Prompt(text: "This first state of ”everywhere-stuff-was-really-hot” didn't change for a WHILE. Things had to cool down a bit.", promptID: 2, modelCaller: 2, options: [
+                Option(text: "1. So it was still kinda boring. Great.", answer: "Be patient. Remember that the end of this story is that you now have to worry about things like what to have for dinner and whatever a ”Large Language Model” is.",nextPromptID: 3),
+                Option(text: "2. How much time?", answer: "400 000 years give or take. \nOr 3 jimbos. \nOr 5.7 flerberts. \nOutside the average lifespan of us fleshy things, time starts to have little meaning, so go crazy!",nextPromptID: 3)]),
+            Prompt(text: "When stuff cooled down enough, it started to group together into these tiny things Nerds call ”Atoms”, but i think we should give them our own name.", promptID: 3, options: [
+                Option(text:"1. Ahhh, ”Carlos”?", answer: "Perfect.", nextPromptID: 4),
+                Option(text:"2. What about: The Basic Build Block, or BBB, for short?", answer: "Nah, that's bad. Let's go with Carlos.", nextPromptID: 4)]),
+            Prompt(text: "It turns out that stuff has a property that makes it attract other stuff. So, over time, a bunch of Carlos’ gets closer and closer together, until there is too much of it, TOO close.\n \nAnd, through the magic of FUSION, a big hot ball, called a Star, is born. \n \nFUSION combines the Stuff that makes up the simpler Atoms (or Carlos) in a Star into other, more complex types of Atoms.", promptID: 4, modelCaller: 2, options: [
+                Option(text:"1. How many different types of Atoms?", answer: "A lot. Only a few types don't naturally occur through this process. Those are made in a ”Lab”, which is a room with really bright lights and really EXPENSIVE toys.", nextPromptID: 5),
+                Option(text:"2. Why did you give other things silly made up names, but chose to keep the real name for Fusion?", answer: "First, all words are made up. \nSecond, FUSION is already a pretty cool name. Not as cool as Carcinization, mind you, but still pretty cool. (No, I will not elaborate on what that is).", nextPromptID: 5)])
+                
             
         ]
     }
@@ -58,8 +65,9 @@ class Controller: ObservableObject {
     //3D model data
     var models: [Model] {
         [
-            Model(name: "Earth.usdz", modelID: 0),
-            Model(name: "Mars.usdz", modelID: 1)
+            Model(name: "Scene1", modelID: 0),
+            Model(name: "Scene2", modelID: 1),
+            Model(name: "Scene3", modelID: 2)
         ]
     }
     
@@ -68,12 +76,12 @@ class Controller: ObservableObject {
     @Published var currentPromptID: Int = 0 //this is use to check whitch promp the game is at
     @Published var promptHistory: [Prompt] = [] //this is what the view will check to build it self
     @Published var modelID: Int = 0 //this will be used to call the 3d models to be shown
-    @Published var scene:SCNScene? //this is the 3d model called in Model view
+    @Published var player: AVPlayer?//this is the 3d model called in Model view
    
     //When the View firt appears, this init loads the first prompt in the history to start the game
     init() {
         promptHistoryUpdate(promptID: 0)
-        scene = fetchModel(ID: 0)
+        player = fetchModel(ID: 0)
     }
     
     
@@ -93,15 +101,19 @@ class Controller: ObservableObject {
     
 
     //this will be called to update the 3dmodel shown in the view
-    func fetchModel(ID: Int) -> SCNScene? {
+    func fetchModel(ID: Int) -> AVPlayer{
         
         if let model = models.first(where: { $0.modelID == ID}) {
-            if let scene = SCNScene(named: model.name) {
-                return scene
+            if let scene = Bundle.main.url(forResource: model.name, withExtension: "mp4") {
+                let player = AVPlayer(url: scene)
+                return player
+                
             }
         }
         
-        return nil 
+        return AVPlayer(url: Bundle.main.url(forResource: "Scene1", withExtension: "mp4")!)
+        
+        
     }
     
     

@@ -16,15 +16,22 @@ struct ContentView: View {
         GeometryReader { geometry in //used to set the size of the Spacers, defining where the View will be in relation the the screen
             HStack {
                 Spacer()
-                    .frame(width: geometry.size.width * 0.55)
+                    .frame(width: geometry.size.width * 0.6)
                 VStack {
                     Spacer()
                     ScrollViewReader { proxy in
                         
                         ScrollView {
                             
+                            HStack {
+                                Text("NARRATOR:")
+                                    .foregroundStyle(Color.gray)
+                                Spacer()
+                            }
+                            
+                            
                             ForEach(controllerInstance.promptHistory, id:\.self) { prompt in
-                                
+                              
                                 HStack {
                                     Text(prompt.text)
                                         .multilineTextAlignment(.leading)
@@ -33,7 +40,14 @@ struct ContentView: View {
                                 }
                                 
                                 HStack {
+                                    Text("You:")
+                                        .foregroundStyle(Color.gray)
+                                    Spacer()
+                                }
+                                
+                                HStack {
                                     VStack {
+                                        
                                         ForEach(prompt.options, id:\.self) { option in
                                             
                                             Button(action: {
@@ -43,12 +57,19 @@ struct ContentView: View {
                                                     //If a set option should trigger a change in the 3D model, this will be called
                                                     if prompt.modelCaller != -1 {
                                                         controllerInstance.modelID = prompt.modelCaller
-                                                        controllerInstance.scene = controllerInstance.fetchModel(ID: controllerInstance.modelID)
+                                                        
+                                                        controllerInstance.player = controllerInstance.fetchModel(ID: controllerInstance.modelID)
+                                                        
                                                     }
                                                 }
                                             }
                                                    , label: {
-                                                Text(option.text)
+                                                HStack {
+                                                    Text(option.text)
+                                                        .multilineTextAlignment(.leading)
+                                                    Spacer()
+                                                }
+                                                
                                                 
                                                 
                                             }).disabled(prompt.promptID != controllerInstance.currentPromptID) //if that choice has being made, the buttons should disable
@@ -70,30 +91,31 @@ struct ContentView: View {
                             }
                             
                             //The "proxy" defined in the ScrollViewReader will scroll to bottom every time the promptHistory gets updated with a new Prompt
-                            .onChange(of: controllerInstance.promptHistory.count) {
-                                proxy.scrollTo(controllerInstance.promptHistory.last)
+                            .onChange(of: controllerInstance.promptHistory.count) { _ in
+                               // proxy.scrollTo(controllerInstance.promptHistory.last)
                                 
                             }
                             
                         }
                     }
+                    .font(.custom("NewYorkExtraLarge-Black", size: 26))
                     .fontDesign(.serif)
                     .font(.title)
                     .padding(16)
                     .background(
-                        Material.regular.opacity(1)
+                        Material.ultraThin.blendMode(.plusDarker)
                     )
                     
                     .scrollIndicators(.hidden)
                     
                     Spacer()
                 }
-               
                 
-              
+                
+                
                 
                 Spacer()
-                    .frame(width: geometry.size.width * 0.05)
+                    .frame(width: geometry.size.width * 0.03)
                 
             }
         }
