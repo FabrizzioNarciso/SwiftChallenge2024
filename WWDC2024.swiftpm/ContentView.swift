@@ -102,8 +102,7 @@ struct ContentView: View {
                         
                         
                     }
-                    .font(.custom("New York", size: 30))
-                    .font(.title)
+                    .font(.custom("New York", size: UIDevice.current.userInterfaceIdiom == .pad ? 30 : 16))
                     .padding(16)
                     .background(
                         Material.ultraThin.blendMode(.plusDarker)
@@ -118,7 +117,7 @@ struct ContentView: View {
                 
                 
                 Spacer()
-                    .frame(width: geometry.size.width * 0.03)
+                   .frame(width: geometry.size.width * 0.03)
                 
             }
         }
